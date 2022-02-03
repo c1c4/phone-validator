@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phone-validator-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phone-validator-api
+  template:
+    metadata:
+      labels:
+        app: phone-validator-api
+    spec:
+      containers:
+      - name: phone-validator-api
+        image: your-image
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: ENV
+            value: DEV
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5

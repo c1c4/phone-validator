@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: phone-validator-api
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  app:

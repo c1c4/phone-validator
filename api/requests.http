@@ -1,0 +1,7 @@
+GET http://localhost:8080/v1/phones
+?state=OK
+&country=Cameroon
+
+###
+GET http://localhost:8080/v1/phones
+?country=Cameroon
