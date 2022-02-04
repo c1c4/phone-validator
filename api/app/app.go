@@ -13,6 +13,7 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -48,6 +49,7 @@ func (app *App) StartApp() {
 
 	router := gin.New()
 	router.Use(middleware.Logger())
+	router.Use(cors.Default())
 
 	routers.InitializeRoutes(router)
 

@@ -3,15 +3,32 @@ package controllers
 import (
 	"api/app/models"
 	"api/app/repositories"
+	"api/app/utils/error_utils"
+	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetAllPhones(c *gin.Context) {
+	var err error
+	page := 1
 	state := c.Query("state")
 	country := c.Query("country")
+	pageString := c.Query("page")
 	phones := []models.Phone{}
+
+	if len(pageString) > 0 {
+		page, err = strconv.Atoi(pageString)
+
+		if err != nil {
+			errBadRequest := error_utils.NewBadRequestError(fmt.Sprintf("not possible to convert %s into a number", pageString))
+			c.JSON(errBadRequest.Status(), errBadRequest)
+			return
+		}
+	}
+
 	dbCustomers := repositories.CustomerRepo.GetAll()
 	for _, customer := range dbCustomers {
 		phone := models.Phone{}
@@ -34,5 +51,12 @@ func GetAllPhones(c *gin.Context) {
 		}
 	}
 
-	c.JSON(http.StatusOK, phones)
+	pagination := models.Pagination{}
+	pagination.Prepare(phones, page)
+
+	paginationPhones := models.PaginationPhone{}
+
+	paginationPhones.Prepare(phones, pagination, page)
+
+	c.JSON(http.StatusOK, paginationPhones)
 }

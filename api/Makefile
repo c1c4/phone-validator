@@ -2,7 +2,7 @@ build.application:
 	docker-compose up --build
 
 start.application:
-	docker-compose up -d
+	docker-compose up
 
 stop.application:
 	docker-compose down

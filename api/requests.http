@@ -4,4 +4,8 @@ GET http://localhost:8080/v1/phones
 
 ###
 GET http://localhost:8080/v1/phones
-?country=Cameroon
+?country=Uganda
+
+###
+GET http://localhost:8080/v1/phones
+?page=4
