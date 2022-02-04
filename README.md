@@ -1,8 +1,12 @@
 # Phone Validator
 Web App to show you some phones and show if it's valid or not.
 
+<img width="1679" alt="Screen Shot 2022-02-04 at 17 48 39" src="https://user-images.githubusercontent.com/5156931/152605691-7cb98d41-b9ed-4a2b-8da4-ef54e0c7ff56.png">
+
+
 #
 ## The Api
+
 The api is built with: 
 
 ### API
